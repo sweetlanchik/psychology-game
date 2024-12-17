@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабіринт свідомості</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background: #6c63ff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        nav {
+            text-align: center;
+            margin: 20px 0;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #6c63ff;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        nav a:hover {
+            color: #574dcf;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 30px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        .game-section {
+            display: none;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .visible {
+            display: block;
+            opacity: 1;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #6c63ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 15px 0;
+            text-align: center;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .button:hover {
+            background: #574dcf;
+            transform: scale(1.05);
+        }
+        .button:active {
+            transform: scale(0.95);
+        }
+        .button:focus {
+            outline: none;
+        }
+        .game-room {
+            margin-top: 20px;
+        }
+        .game-room img {
+            max-width: 100%;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .feedback {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Лабіринт свідомості</h1>
+        <p>Подорож у світ вашої психіки</p>
+    </header>
+
+    <nav>
+        <a href="#" onclick="showSection('about')">Про гру</a>
+        <a href="#" onclick="showSection('game')">Грати</a>
+        <a href="#" onclick="showSection('info')">Психологічна допомога</a>
+    </nav>
+
+    <div class="container">
+        <!-- About Section -->
+        <div id="about" class="game-section visible">
+            <h2>Про гру</h2>
+            <p>"Лабіринт свідомості" - це інтерактивна гра, що допоможе вам краще зрозуміти себе, розпізнати свої емоції та знайти гармонію. Кожна кімната у грі відкриє новий аспект вашої свідомості.</p>
+            <a class="button" href="#" onclick="showSection('game')">Розпочати гру</a>
+        </div>
+
+        <!-- Game Section -->
+        <div id="game" class="game-section">
+            <h2>Гра</h2>
+            <p>Вітаємо у лабіринті! Ваше завдання — пройти через кімнати та виконати завдання. Почнемо з першої кімнати.</p>
+            <a class="button" href="#" onclick="startGame()">Увійти до першої кімнати</a>
+            <div id="game-room" class="game-room"></div>
+        </div>
+
+        <!-- Info Section -->
+        <div id="info" class="game-section">
+            <h2>Психологічна допомога</h2>
+            <p>Гра побудована на основі базових принципів психології. Для детальнішого розуміння зверніться до наступних матеріалів:</p>
+            <ul>
+                <li><a href="#" target="_blank">Стаття про емоційний інтелект</a></li>
+                <li><a href="#" target="_blank">Техніки зниження стресу</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.game-section');
+            sections.forEach(section => {
+                section.classList.remove('visible');
+            });
+            const selectedSection = document.getElementById(sectionId);
+            selectedSection.classList.add('visible');
+        }
+
+        function startGame() {
+            const gameRoom = document.getElementById('game-room');
+            gameRoom.innerHTML = `
+                <h3>Кімната Емоцій</h3>
+                <p>Яку емоцію ви відчуваєте, коли бачите це зображення?</p>
+                <img src="https://via.placeholder.com/300" alt="Емоція" />
+                <div>
+                    <button class="button" onclick="checkAnswer('Радість')">Радість</button>
+                    <button class="button" onclick="checkAnswer('Смуток')">Смуток</button>
+                    <button class="button" onclick="checkAnswer('Гнів')">Гнів</button>
+                </div>
+                <div id="feedback" class="feedback"></div>
+            `;
+        }
+
+        function checkAnswer(answer) {
+            const feedback = document.getElementById('feedback');
+            if (answer === 'Радість') {
+                feedback.textContent = 'Правильно! Переходимо до наступної кімнати!';
+                feedback.style.color = 'green';
+            } else {
+                feedback.textContent = 'Неправильно, спробуйте ще раз!';
+                feedback.style.color = 'red';
+            }
+        }
+    </script>
+</body>
+</html>
